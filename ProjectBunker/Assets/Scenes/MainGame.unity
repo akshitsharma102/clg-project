@@ -427,7 +427,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 1
   weight: 1
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: 1c215431e837bfc40b6fde941a5bc317, type: 2}
 --- !u!65 &761701804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699199957}
-  m_LocalRotation: {x: 0.1283383, y: 0.000000008532045, z: -0.0000000011041188, w: 0.99173045}
+  m_LocalRotation: {x: 0.1283383, y: -0.000000008532046, z: 0.0000000011041189, w: 0.99173045}
   m_LocalPosition: {x: 0, y: 6.13, z: -15.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -695,7 +695,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793170939}
-  m_LocalRotation: {x: 0.1283383, y: 0.000000008532045, z: -0.0000000011041188, w: 0.99173045}
+  m_LocalRotation: {x: 0.1283383, y: -0.000000008532046, z: 0.0000000011041189, w: 0.99173045}
   m_LocalPosition: {x: 0, y: 6.13, z: -15.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
