@@ -11,8 +11,7 @@ public class PlayerScript : MonoBehaviour
 
     //essential variables for touch controls
     private float screenWidth;
-    [HideInInspector]
-    public bool IsDead = false;
+    
 
     //motion variables
     [SerializeField]
@@ -25,6 +24,10 @@ public class PlayerScript : MonoBehaviour
     private float RotationAngle = 45f;
     [SerializeField]
     private float TimeToRotate = 3f;
+
+    //death variabls
+    [HideInInspector]
+    public bool IsDead = false;
     private void Awake()
     {
         instance = this;
@@ -60,7 +63,6 @@ public class PlayerScript : MonoBehaviour
             if (Input.touchCount == 0)
             {
                 rb.velocity = new Vector3(0f, 0f, rb.velocity.z);
-               
             }
         }
     }
@@ -76,19 +78,16 @@ public class PlayerScript : MonoBehaviour
             {
                 if (Input.GetTouch(i).position.x > screenWidth / 2)
                 {
-                   
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, 1f * -RotationAngle), TimeToRotate * Time.deltaTime);
                 }
                 else if (Input.GetTouch(i).position.x < screenWidth / 2)
                 {
-                    
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, -1f * -RotationAngle), TimeToRotate * Time.deltaTime);
                 }
                 ++i;
             }
             if (Input.touchCount == 0)
             {
-               
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), TimeToRotate * Time.deltaTime);
             }
         }
