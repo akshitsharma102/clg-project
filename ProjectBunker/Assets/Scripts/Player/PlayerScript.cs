@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -24,10 +25,18 @@ public class PlayerScript : MonoBehaviour
     private float RotationAngle = 45f;
     [SerializeField]
     private float TimeToRotate = 3f;
+    [SerializeField]
+    GameObject playerGFX;
+    [SerializeField]
+    GameObject[] playerVFX;
 
     //death variabls
     [HideInInspector]
     public bool IsDead = false;
+    [SerializeField]
+    ParticleSystem fire;
+    [SerializeField]
+    AudioSource explosion;
     private void Awake()
     {
         instance = this;
@@ -93,7 +102,23 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
-    
+    //death 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("collission");
+        if(collision.collider.CompareTag("Enemy"))
+        {
+            IsDead = true;
+            fire.Play();
+            explosion.Play();
+            playerGFX.SetActive(false);
+            for (int i = 0; i < playerVFX.Length; i++)
+            {
+                playerVFX[i].SetActive(false);
+                rb.velocity = new Vector3(0f, 0f, 0f);
+            }
+        }
+    }
 
 
 
