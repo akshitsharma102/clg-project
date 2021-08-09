@@ -35,44 +35,66 @@ public class PlayerScript : MonoBehaviour
         screenWidth = Screen.width;
 
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (IsDead == false)
         {
-            MoveCharacterForward();
+            rb.AddForce(transform.forward * ForwardSpeed * Time.deltaTime);
+
             int i = 0;
 
             while (i < Input.touchCount)
             {
                 if (Input.GetTouch(i).position.x > screenWidth / 2)
                 {
-                    //moving right
-                    MoveCharacter(1.0f);
+                    rb.velocity = new Vector3(1f * LRspeed, rb.velocity.y, rb.velocity.z);
+          
                 }
                 else if (Input.GetTouch(i).position.x < screenWidth / 2)
                 {
-                    //moving left
-                    MoveCharacter(-1.0f);
+                    rb.velocity = new Vector3(-1f * LRspeed, rb.velocity.y, rb.velocity.z);
+                    
                 }
                 ++i;
             }
             if (Input.touchCount == 0)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), TimeToRotate * Time.deltaTime);
+                rb.velocity = new Vector3(0f, 0f, rb.velocity.z);
+               
             }
         }
     }
-    private void MoveCharacterForward()
+    private void FixedUpdate()
     {
-        rb.AddForce(new Vector3( 0, 0, ForwardSpeed * Time.deltaTime));
+        if (IsDead == false)
+        {
+            rb.AddForce(transform.forward * ForwardSpeed * Time.deltaTime);
+
+            int i = 0;
+
+            while (i < Input.touchCount)
+            {
+                if (Input.GetTouch(i).position.x > screenWidth / 2)
+                {
+                   
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, 1f * -RotationAngle), TimeToRotate * Time.deltaTime);
+                }
+                else if (Input.GetTouch(i).position.x < screenWidth / 2)
+                {
+                    
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, -1f * -RotationAngle), TimeToRotate * Time.deltaTime);
+                }
+                ++i;
+            }
+            if (Input.touchCount == 0)
+            {
+               
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), TimeToRotate * Time.deltaTime);
+            }
+        }
+        
     }
-    private void MoveCharacter(float horizontalInput)
-    {
-        rb.AddForce(new Vector3(horizontalInput * LRspeed * Time.deltaTime, 0, 0));
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, horizontalInput * -RotationAngle), TimeToRotate * Time.deltaTime);
-    }
+    
 
 
 
