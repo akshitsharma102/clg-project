@@ -105,19 +105,24 @@ public class PlayerScript : MonoBehaviour
     //death 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collission");
-        if(collision.collider.CompareTag("Enemy"))
-        {
-            IsDead = true;
-            fire.Play();
-            explosion.Play();
-            playerGFX.SetActive(false);
-            for (int i = 0; i < playerVFX.Length; i++)
+        if (IsDead == false) 
+        { 
+            Debug.Log("collission");
+            if (collision.collider.CompareTag("Enemy"))
             {
-                playerVFX[i].SetActive(false);
-                rb.velocity = new Vector3(0f, 0f, 0f);
+                IsDead = true;
+                fire.Play();
+                explosion.Play();
+                playerGFX.SetActive(false);
+                for (int i = 0; i < playerVFX.Length; i++)
+                {
+                    playerVFX[i].SetActive(false);
+                    rb.velocity = new Vector3(0f, 0f, 0f);
+                }
+                GameManager.Instance.Lost();
             }
         }
+        
     }
 
 
